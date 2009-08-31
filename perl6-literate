@@ -1,0 +1,15 @@
+#!/usr/local/bin/perl6
+use v6;
+use Perl6::Literate;
+
+die "Usage: $*PROGRAM_NAME <script>\n"
+    unless @*ARGS == 1 && @*ARGS[0] ~~ :e;
+
+my $scriptfile = @*ARGS[0];
+
+my $tempfile = [~] 'temp_', map { (1..9).pick }, ^5;
+my $fh = open $tempfile, :w;
+$fh.print: Perl6::Literate::convert( slurp($scriptfile) );
+$fh.close;
+run("perl6 $tempfile");
+run("rm $tempfile");
