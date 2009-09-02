@@ -12,4 +12,4 @@ my $fh = open $tempfile, :w;
 $fh.print: Perl6::Literate::convert( slurp($scriptfile) );
 $fh.close;
 run("perl6 $tempfile");
-run("rm $tempfile");
+unlink($tempfile);
