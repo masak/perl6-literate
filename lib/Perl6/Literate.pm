@@ -1,8 +1,8 @@
 module Perl6::Literate;
 
-regex empty { ^ \s* $ }
+my regex empty { ^ \s* $ }
 
-sub convert($text) {
+our sub convert($text) {
     # There are six modes, 'start', 'code', 'comment', 'empty line after code'
     # and 'empty line after comment'. The latter two are abbreviated '_code'
     # and '_comment', respectively. All given-statements looping over $mode
@@ -60,7 +60,7 @@ sub convert($text) {
     # lines and other unholy tricks.
     for reverse 0..(@p - 2) -> $n {
         if @p[$n] ~~ /<empty>/ && @p[$n+1] ~~ /'=end Comment'\n/ {
-            @p[$n], @p[$n+1] = @p[$n+1], @p[$n];
+            (@p[$n], @p[$n+1]) = @p[$n+1], @p[$n];
         }
     }
 
