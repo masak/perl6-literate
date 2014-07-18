@@ -12,3 +12,5 @@ Here is some text.
 
   say 'OH HAI';]]],
    'comment and then code';
+
+done;
